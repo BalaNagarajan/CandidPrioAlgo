@@ -16,49 +16,12 @@ import com.forum.feedback.priority.model.Reviewer;
 public class GeneratePriority {
 
 	public void generatePriorityHandBook(Map<String, List<Reviewer>> updatedCandidateMap) {
-
-		// Create a Workbook
 		Workbook workbook = new XSSFWorkbook();
-
-		/*
-		 * CreationHelper helps us create instances for various things like
-		 * DataFormat, Hyperlink, RichTextString etc in a format (HSSF, XSSF)
-		 * independent way
-		 */
 		CreationHelper createHelper = workbook.getCreationHelper();
-
-		// Create a Sheet
 		Sheet sheet = workbook.createSheet("Candidates");
-
-		// Create a Font for styling header cells
-		/*
-		 * Font headerFont = workbook.createFont(); headerFont.setBold(true);
-		 * headerFont.setFontHeightInPoints((short) 14);
-		 * headerFont.setColor(IndexedColors.RED.getIndex());
-		 */
-
-		// Create a CellStyle with the font
-		/*
-		 * CellStyle headerCellStyle = workbook.createCellStyle();
-		 * headerCellStyle.setFont(headerFont);
-		 */
-
-		// Create a Row
-		// Row headerRow = sheet.createRow(0);
-
-		// Creating cells
-		/*
-		 * Cell cell1 = headerRow.createCell(0);
-		 * cell1.setCellValue("Candiate Name");
-		 * cell1.setCellStyle(headerCellStyle); Cell cell2 =
-		 * headerRow.createCell(1); cell2.setCellValue("ReviewerName");
-		 * cell2.setCellStyle(headerCellStyle);
-		 */
 		try {
-			
 			// Write the output to a file
 			FileOutputStream fileOut = new FileOutputStream("candidate-prio-generated-file.xlsx");
-		
 
 			if (updatedCandidateMap != null && !updatedCandidateMap.isEmpty()) {
 				GeneratePriority generatePriority = new GeneratePriority();
@@ -66,8 +29,6 @@ public class GeneratePriority {
 				int rowIndex = 0;
 				for (String nameVal : nameSet) {
 					List<Reviewer> reviewerFinalList = updatedCandidateMap.get(nameVal);
-					System.out.println("-----------------CANDIDATE NAME---------" + nameVal);
-					System.out.println("-----------------REVIEWERS Starts---------");
 					if (reviewerFinalList != null && reviewerFinalList.size() > 0) {
 						for (Reviewer reviewerObject : reviewerFinalList) {
 							Row row = sheet.createRow(rowIndex);
@@ -77,7 +38,6 @@ public class GeneratePriority {
 							rowIndex++;
 						}
 					}
-					System.out.println("-----------------REVIEWERS Ends---------");
 				}
 
 			}
